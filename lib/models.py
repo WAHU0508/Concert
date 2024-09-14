@@ -21,7 +21,7 @@ class Band(Base):
     hometown = Column(String())
 
     """One to many relationship between band and concerts"""
-    concerts = relationship('Concert', backref = backref('bands'))
+    concerts = relationship('Concert', backref = backref('band'))
 
     def __repr__(self):
         return f'Band(id={self.id}, ' + \
@@ -36,11 +36,11 @@ class Venue(Base):
     city = Column(String())
 
     """One to many relationship between band and concerts"""
-    concerts = relationship('Concert', backref = backref('venues'))
+    concerts = relationship('Concert', backref = backref('venue'))
 
     def __repr__(self):
         return f'<Venue: id={self.id}, ' + \
-            f'tilte={self.title}, ' + \
+            f'title={self.title}, ' + \
             f'city={self.city}>'
 
 class Concert(Base):
@@ -51,3 +51,9 @@ class Concert(Base):
 
     band_id = Column(Integer(), ForeignKey('bands.id'))
     venue_id = Column(Integer(), ForeignKey('venues.id'))
+
+    def __repr__(self):
+        return f'<Concert: id={self.id}, ' + \
+            f'date={self.date}, ' + \
+            f'band_id={self.band_id}, ' + \
+            f'venue_id={self.venue_id}>'
