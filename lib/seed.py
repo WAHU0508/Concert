@@ -37,3 +37,11 @@ if __name__ == '__main__':
     concert5 = Concert(date = '2024-01-22', band_id = band5.id, venue_id = venue5.id)
     session.add_all([concert1, concert2, concert3, concert4, concert5])
     session.commit()
+
+    band1.venues.append(venue1)
+    band1.venues.append(venue2)
+    band2.venues.append(venue3)
+    band3.venues.append(venue3)
+    band4.venues.append(venue4)
+    band5.venues.append(venue5)
+    session.commit()

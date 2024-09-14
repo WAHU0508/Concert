@@ -13,6 +13,14 @@ engine = create_engine('sqlite:///concerts.db')
 Session = sessionmaker(bind=engine)
 session = Session()
 
+band_venue = Table(
+    'band_venues',
+    Base.metadata,
+    Column('band_id', ForeignKey('bands.id'), primary_key=True),
+    Column('venue_id', ForeignKey('venues.id'), primary_key=True),
+    extend_existing=True,
+)
+
 class Band(Base):
     __tablename__ = 'bands'
 
@@ -22,6 +30,9 @@ class Band(Base):
 
     """One to many relationship between band and concerts"""
     concerts = relationship('Concert', backref = backref('band'))
+
+    """Many to many relationship between band and venue using table objects"""
+    venues = relationship('Venue', secondary=band_venue, back_populates='bands')
 
     def __repr__(self):
         return f'Band(id={self.id}, ' + \
@@ -37,6 +48,9 @@ class Venue(Base):
 
     """One to many relationship between band and concerts"""
     concerts = relationship('Concert', backref = backref('venue'))
+
+    """Many to many relationship between band and venue using table objects"""
+    bands = relationship('Band', secondary=band_venue, back_populates='venues')
 
     def __repr__(self):
         return f'<Venue: id={self.id}, ' + \
