@@ -76,3 +76,65 @@ A date column that stores an string.
 After creating the concerts table using a migration, create instances of your classes so you can test your code.
 
 Once you've set up your tables, work on building out the following deliverables.
+
+## Deliverables
+> cd into lib directory
+> Running python [seed.py](./lib/seed.py) populates the database with data
+> Run python [debug.py](./lib/debug.py) to open ipdb session to test out the methods in my application.
+
+### Object Relationship Methods
+Use SQLAlchemy query methods where appropriate.
+
+#### Concert
+* Concert band()
+should return the Band instance for this Concert
+* Concert venue()
+should return the Venue instance for this Concert
+
+#### Venue
+* Venue concerts()
+returns a collection of all the concerts for the Venue
+* Venue bands()
+returns a collection of all the bands who performed at the Venue
+
+#### Band
+* Band concerts()
+should return a collection of all the concerts that the Band has played
+* Band venues()
+should return a collection of all the venues that the Band has performed at
+ 
+
+Ensure these methods work before proceeding. For example, you should be able to call session. query(Band).first().venues and see a list of the venues for the first band in the database based on your test data, and session. query(Band).first() should return the band for the first concert in the database.
+
+### Aggregate and Relationship Methods
+#### Concert
+* Concert hometown_show()
+returns true if the concert is in the band's hometown, false if it is not
+* Concert introduction()
+returns a string with the band's introduction for this concert
+an introduction is in the form:
+"Hello {insert venue city}!!!!! We are {insert band name} and we're from {insert band hometown}"
+
+#### Band
+* Band play_in_venue(venue, date)
+takes a venue (Venue instance) and date (as a string) as arguments
+creates a new concert for the band in that venue on that date\
+* Band all_introductions()
+returns an array of strings representing all the introductions for this band
+each introduction is in the form:
+"Hello {insert venue city}!!!!! We are {insert band name} and we're from {insert band hometown}"
+
+* Band most_performances() class method
+returns the Band instance for the band that has played the most concerts
+Note: solving this using only SQLAlchemy methods is possible, but difficult. Feel free to use regular Python enumerable methods here.
+
+#### Venue
+* Venue concert_on(date)
+takes a date (string) as an argument
+finds and returns the first concert on that date at that venue
+* Venue most_frequent_band()
+returns the band with the most concerts at the venue
+Note: solving this using only SQLAlchemy methods is possible, but difficult. Feel free to use regular Python enumerable methods here.
+
+
+
