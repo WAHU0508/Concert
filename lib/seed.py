@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 
 from models import Band, Venue, Concert
@@ -13,6 +13,8 @@ if __name__ == '__main__':
     session.query(Band).delete()
     session.query(Venue).delete()
     session.query(Concert).delete()
+
+    session.execute(text('DELETE FROM band_venues'))
 
     band1 = Band(name = 'The Rolling Stones', hometown = 'London')
     band2 = Band(name = 'The Beatles', hometown = 'Liverpool')
@@ -30,18 +32,23 @@ if __name__ == '__main__':
     session.add_all([venue1, venue2, venue3, venue4, venue5])
     session.commit()
 
-    concert1 = Concert(date = '2024-09-15', band_id = band1.id, venue_id = venue1.id)
-    concert2 = Concert(date = '2024-10-05', band_id = band2.id, venue_id = venue2.id)
-    concert3 = Concert(date = '2024-11-20', band_id = band3.id, venue_id = venue3.id)
-    concert4 = Concert(date = '2024-12-10', band_id = band4.id, venue_id = venue4.id)
-    concert5 = Concert(date = '2024-01-22', band_id = band5.id, venue_id = venue5.id)
-    session.add_all([concert1, concert2, concert3, concert4, concert5])
+    concert101 = Concert(date = '2024-09-15', band_id = band1.id, venue_id = venue1.id)
+    concert102 = Concert(date = '2024-09-21', band_id = band1.id, venue_id = venue2.id)
+    concert201 = Concert(date = '2024-10-05', band_id = band2.id, venue_id = venue2.id)
+    concert202 = Concert(date = '2024-10-19', band_id = band2.id, venue_id = venue3.id)
+    concert301 = Concert(date = '2024-11-04', band_id = band3.id, venue_id = venue3.id)
+    concert302 = Concert(date = '2024-11-31', band_id = band3.id, venue_id = venue4.id)
+    concert401 = Concert(date = '2024-12-10', band_id = band4.id, venue_id = venue4.id)
+    concert501 = Concert(date = '2024-01-22', band_id = band5.id, venue_id = venue5.id)
+    session.add_all([concert101, concert102, concert201, concert202, concert301, concert302, concert401, concert501])
     session.commit()
 
-    band1.venues.append(venue1)
-    band1.venues.append(venue2)
-    band2.venues.append(venue3)
-    band3.venues.append(venue3)
-    band4.venues.append(venue4)
-    band5.venues.append(venue5)
+    band1.all_venues.append(venue1)
+    band1.all_venues.append(venue2)
+    band2.all_venues.append(venue2)
+    band2.all_venues.append(venue3)
+    band3.all_venues.append(venue3)
+    band3.all_venues.append(venue4)
+    band4.all_venues.append(venue4)
+    band5.all_venues.append(venue5)
     session.commit()
