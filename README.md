@@ -36,8 +36,9 @@ SQLAlchemy Querying
         alembic revision -m "Empty Init"
         alembic upgrade head
     ```
-What You Should Have:
- Your schema should look like this:
+2. Create schema for the bands table and Concerts table:
+   What You Should Have:
+   Your schema should look like this:
  
 
 * Bands Table
