@@ -27,9 +27,9 @@ if __name__ == '__main__':
     venue1 = Venue(title = 'Wembley Stadium', city = 'London')
     venue2 = Venue(title = 'Madison Square Garden', city = 'New York')
     venue3 = Venue(title = 'The Forum', city = 'Los Angeles')
-    # venue4 = Venue(title = 'Sydney Opera House', city = 'Sydney')
-    # venue5 = Venue(title = 'Red Rocks Amphitheater', city = 'Denver')
-    session.add_all([venue1, venue2, venue3])
+    venue4 = Venue(title = 'Sydney Opera House', city = 'Sydney')
+    venue5 = Venue(title = 'Red Rocks Amphitheater', city = 'Denver')
+    session.add_all([venue1, venue2, venue3, venue4, venue5])
     session.commit()
 
     concert101 = Concert(date = '2024-09-15', band_id = band1.id, venue_id = venue1.id)

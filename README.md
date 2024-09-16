@@ -81,6 +81,7 @@ Once you've set up your tables, work on building out the following deliverables.
 > cd into lib directory
 > Running python [seed.py](./lib/seed.py) populates the database with data
 > Run python [debug.py](./lib/debug.py) to open ipdb session to test out the methods in my application.
+> Run (pytest -x models_tests.py) to check for the tests.
 
 ### Object Relationship Methods
 Use SQLAlchemy query methods where appropriate.
